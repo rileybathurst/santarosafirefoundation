@@ -1,0 +1,15 @@
+/*
+	Theme Name:   Twenty Twenty One Child
+	Description:  Twenty Twenty One Child Theme
+	Theme URI:    https://santarosafirefoundation.org/
+	Author:       Riley Bathurst
+	Author URI:   http://rileybathurst.com
+	Template:     twentytwentyone
+	Version:      1.0.0
+	Tags:         education, light, dark, responsive-layout, accessibility-ready
+	Text Domain:  twentytwentyonechild
+*/
+
+:root {
+  --test: 1rem;
+}
