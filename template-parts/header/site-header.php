@@ -13,13 +13,15 @@ $wrapper_classes .= ( true === get_theme_mod( 'display_title_and_tagline', true 
 $wrapper_classes .= has_nav_menu( 'primary' ) ? ' has-menu' : '';
 ?>
 
-<header id="masthead" class="<?php echo esc_attr( $wrapper_classes ); ?>" role="banner">
+<div class="site-header__wrapper">
+	<header id="masthead" class="<?php echo esc_attr( $wrapper_classes ); ?>" role="banner">
 
-<img src="<?php echo get_option( 'header_image' ); ?>" alt="<?php echo get_option( 'header_alt' ); ?>" style="max-height: 10rem;" />
+	<img src="<?php echo get_option( 'header_image' ); ?>" alt="<?php echo get_option( 'header_alt' ); ?>" style="max-height: 10rem;" />
 
-<div class="header-grid--overlay" style="background-color: <?php echo get_option( 'sides_of_header_image' ); ?>"><!-- stay gold --></div>
+	<div class="header-grid--overlay" style="background-color: <?php echo get_option( 'sides_of_header_image' ); ?>"><!-- stay gold --></div>
 
-	<?php get_template_part( 'template-parts/header/site-branding' ); ?>
-	<?php get_template_part( 'template-parts/header/site-nav' ); ?>
+		<?php get_template_part( 'template-parts/header/site-branding' ); ?>
+		<?php get_template_part( 'template-parts/header/site-nav' ); ?>
 
-</header><!-- #masthead -->
+	</header><!-- #masthead -->
+</div>
