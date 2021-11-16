@@ -154,3 +154,25 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'admin_print_styles', 'print_emoji_styles' );
+
+function board_setup_post_type() {
+	register_post_type( 'board',
+	array(
+		'labels'			=> array(
+			'name'			=> __('Board'),
+			'singular_name'	=> __('Board'),
+		),
+		'public'			=> true,
+		'has_archive'		=> true,
+		'show_in_rest' 		=> true,
+		'rewrite'			=> array( 'slug' => 'board' ),
+		'supports'			=> array( 
+			'title',
+			'editor',
+			'author',
+			'thumbnail',
+			'excerpt',
+			)
+	) ); 
+} 
+add_action( 'init', 'board_setup_post_type' );
