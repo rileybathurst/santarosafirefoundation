@@ -14,14 +14,20 @@ $wrapper_classes .= has_nav_menu( 'primary' ) ? ' has-menu' : '';
 ?>
 
 <div class="site-header__wrapper">
+	<img src="<?php echo get_option( 'header_image' ); ?>" alt="<?php echo get_option( 'header_alt' ); ?>" class="header_image" />
+	
 	<header id="masthead" class="<?php echo esc_attr( $wrapper_classes ); ?>" role="banner">
-
-	<img src="<?php echo get_option( 'header_image' ); ?>" alt="<?php echo get_option( 'header_alt' ); ?>" style="max-height: 10rem;" />
 
 	<div class="header-grid--overlay" style="background-color: <?php echo get_option( 'sides_of_header_image' ); ?>"><!-- stay gold --></div>
 
 		<?php get_template_part( 'template-parts/header/site-branding' ); ?>
 		<?php get_template_part( 'template-parts/header/site-nav' ); ?>
+
+		<div class="the-heros">
+			<img src="<?php echo get_option( 'hero_one' ); ?> " alt="" class="hero hero_one" />
+			<img src="<?php echo get_option( 'hero_two' ); ?> " alt="" class="hero hero_two" />
+			<img src="<?php echo get_option( 'hero_three' ); ?> " alt="" class="hero hero_three" />
+		</div>
 
 	</header><!-- #masthead -->
 </div>

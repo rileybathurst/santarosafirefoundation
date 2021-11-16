@@ -1,5 +1,13 @@
 <?php
 
+// style sheet this should probably de further down
+// https://developer.wordpress.org/themes/advanced-topics/child-themes/#enqueueing-styles-and-scripts
+function my_plugin_add_stylesheet() {
+    wp_enqueue_style( 'my-style', get_stylesheet_directory_uri() . '/style.css', false, '1.0', 'all' );
+    wp_enqueue_style( 'app-style', get_stylesheet_directory_uri() . '/app.css', false, '1.1', 'all' );
+}
+add_action( 'wp_enqueue_scripts', 'my_plugin_add_stylesheet' );
+
 // https://developer.wordpress.org/reference/hooks/customize_register/
 function twenttwentyone_child_customize_register($wp_customize){
     $wp_customize->add_section('header_img_options', array(
@@ -19,6 +27,7 @@ function twenttwentyone_child_customize_register($wp_customize){
     //  =============================
 
     // the reason I dont use the custom background is that pukks from the body_class();
+    // I also dont know what I wrote here
 
     $wp_customize->add_setting('header_image', array(
         'default'		=> 'image.jpg',
@@ -36,6 +45,52 @@ function twenttwentyone_child_customize_register($wp_customize){
         )
     );
     // <img src="<?php echo get_option( 'header_image' ); " alt="" />
+    
+    $wp_customize->add_setting('hero_one', array(
+        'default'		=> 'image.jpg',
+        'capability'	=> 'edit_theme_options',
+        'type'			=> 'option',
+    ));
+
+    $wp_customize->add_control(
+        new WP_Customize_Image_Control( $wp_customize, 'custom_hero_one', array(
+                'label'		=> __( 'Hero One', 'twenttwentyone_child' ),
+                'section'	=> 'header_img_options',
+                'settings'	=> 'hero_one',
+                'context'	=> 'your_setting_context'
+            )
+        )
+    );
+    $wp_customize->add_setting('hero_two', array(
+        'default'		=> 'image.jpg',
+        'capability'	=> 'edit_theme_options',
+        'type'			=> 'option',
+    ));
+
+    $wp_customize->add_control(
+        new WP_Customize_Image_Control( $wp_customize, 'custom_hero_two', array(
+                'label'		=> __( 'Hero Two', 'twenttwentyone_child' ),
+                'section'	=> 'header_img_options',
+                'settings'	=> 'hero_two',
+                'context'	=> 'your_setting_context'
+            )
+        )
+    );
+    $wp_customize->add_setting('hero_three', array(
+        'default'		=> 'image.jpg',
+        'capability'	=> 'edit_theme_options',
+        'type'			=> 'option',
+    ));
+
+    $wp_customize->add_control(
+        new WP_Customize_Image_Control( $wp_customize, 'custom_hero_three', array(
+                'label'		=> __( 'Hero Three', 'twenttwentyone_child' ),
+                'section'	=> 'header_img_options',
+                'settings'	=> 'hero_three',
+                'context'	=> 'your_setting_context'
+            )
+        )
+    );
 
     //  =============================
     //  = Text Input                =

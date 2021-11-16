@@ -1,0 +1,10 @@
+.footer_wrapper, .footer-widgets_wrapper {
+  background-color: var(--combustion);
+  color: white;
+}
+
+.site-footer {
+  > .site-info{
+    border-top: none !important;
+  }
+}

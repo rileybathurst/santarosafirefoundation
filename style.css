@@ -9,20 +9,3 @@
 	Tags:         education, light, dark, responsive-layout, accessibility-ready
 	Text Domain:  twentytwentyonechild
 */
-
-:root {
-	--combustion: hsl(0, 62%, 52%);
-	--navy: hsl(215, 46%, 38%);
-	--sand: hsl(30, 20%, 92%);
-	--midnight: hsl(228, 64%, 8%);
-}
-
-.site-header__wrapper {
-	background-color: var(--combustion);
-	background-color: peachpuff;
-}
-
-.site-header {
-	display: grid;
-	background: peachpuff;
-}

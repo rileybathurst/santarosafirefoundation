@@ -1,0 +1,17 @@
+.event-wrapper {
+  max-width: var(--responsive--alignwide-width);
+  margin-inline: auto;
+  margin-block: 2rem;
+}
+
+.pending_event {
+  background-color: var(--midnight);
+  color: white;
+  text-align: center;
+  
+  a {
+    color: white;
+    margin-block: 1rem;
+    display: inline-block;
+  }
+}
