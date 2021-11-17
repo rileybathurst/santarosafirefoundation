@@ -26,12 +26,33 @@ $meta_query = new WP_Query( $args );
 if ( $meta_query->have_posts() ) {
     while ( $meta_query->have_posts() ) {
         $meta_query->the_post(); ?>
-        <!-- php esc_attr( get_post_meta( $post->ID, 'board_order', true ) ); incase we need to see the numbers -->
-        <!-- php echo esc_attr( get_post_meta( $post->ID, 'board_department', true ) ); ?> test the department -->
-        <?php get_template_part( 'template-parts/content/content-page' );
+
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+      <div class="entry-content"><h3>Question: <?php the_title(); ?></h3></div>
+	<div class="entry-content">
+		<p>Answer: <?php the_content(); ?></p>
+	</div>
+
+	<?php if ( get_edit_post_link() ) : ?>
+		<footer class="entry-footer default-max-width">
+			<?php
+			edit_post_link(
+				sprintf(
+					/* translators: %s: Name of current post. Only visible to screen readers. */
+					esc_html__( 'Edit %s', 'twentytwentyone' ),
+					'<span class="screen-reader-text">' . get_the_title() . '</span>'
+				),
+				'<span class="edit-link">',
+				'</span>'
+			);
+			?>
+		</footer><!-- .entry-footer -->
+	<?php endif; ?>
+</article><!-- #post-<?php the_ID();
+
     }
 }
 /* Restore original Post Data */
-wp_reset_postdata(); ?>
+wp_reset_postdata();
 
 get_footer();
