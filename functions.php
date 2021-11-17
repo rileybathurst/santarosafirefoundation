@@ -180,3 +180,25 @@ add_action( 'init', 'board_setup_post_type' );
 // use the stylesheet as the theme goes to the parent
 include( get_stylesheet_directory() . '/functions/board-order.php' );
 include( get_stylesheet_directory() . '/functions/board-department.php' );
+
+function faqs_setup_post_type() {
+	register_post_type( 'faqs',
+	array(
+		'labels'			=> array(
+			'name'			=> __('FAQs'),
+			'singular_name'	=> __('FAQs'),
+		),
+		'public'			=> true,
+		'has_archive'		=> true,
+		'show_in_rest' 		=> true,
+		'rewrite'			=> array( 'slug' => 'faqs' ),
+		'supports'			=> array( 
+			'title',
+			'editor',
+			'author',
+			'thumbnail',
+			'excerpt',
+			)
+	) ); 
+} 
+add_action( 'init', 'faqs_setup_post_type' );
