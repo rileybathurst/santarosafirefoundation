@@ -1,86 +1,92 @@
 <?php
-/* Fire our meta box setup function on the post editor screen. */
-add_action( 'load-post.php', 'board_department_meta_boxes_setup' );
-add_action( 'load-post-new.php', 'board_department_meta_boxes_setup' );
 
-/* Meta box setup function. */
-function board_department_meta_boxes_setup() {
-
-	/* Add meta boxes on the 'add_meta_boxes' hook. */
-	add_action( 'add_meta_boxes', 'board_department_add_post_meta_boxes' );	
-	/* Save post meta on the 'save_post' hook. */
-	add_action( 'save_post', 'board_department_save_meta', 10, 2 );
-}
-
-/* Create one or more meta boxes to be displayed on the post editor screen. */
-function board_department_add_post_meta_boxes() {
+/**
+ * Adds a box to the main column on the Post add/edit screens.
+ * https://stackoverflow.com/questions/25522380/how-to-set-radio-buttons-in-custom-meta-box-checked
+ */
+function wdm_add_meta_box() {
 
 	add_meta_box(
-		'board-department', // Unique ID
-		esc_html__( 'Board Department', 'example' ), // Title
-		'board_department_meta_box', // Callback function
-		'board', // Admin page (or post type)
-		'side', // Context
-		'default' // Priority
-	);
+		'wdm_sectionid',
+		'Director or Liason',
+		'wdm_meta_box_callback',
+		'board',
+		'side'
+	); //you can change the 4th paramter i.e. post to custom post type name, if you want it for something else
+
 }
 
-// take below here into sperate files
-/* Display the post meta box. */
-function board_department_meta_box( $post ) { ?>
+add_action( 'add_meta_boxes', 'wdm_add_meta_box' );
 
-	<?php wp_nonce_field( basename( __FILE__ ), 'board_department_nonce' ); ?>
+/**
+ * Prints the box content.
+ * 
+ * @param WP_Post $post The object for the current post/page.
+ */
+function wdm_meta_box_callback( $post ) {
 
-	<p>
-		<!-- <label for="board-department-post"> php _e( "Board Department.", 'example' ); ?></label> -->
-		<br />
-		<!-- <input class="widefat" type="text" name="board-department" id="board-department" value="<-- php echo esc_attr( get_post_meta( $post->ID, 'board_department', true ) ); ?>" size="30" /> -->
-	
-    <input type="radio" id="directors" name="<?php get_post_meta( $post->ID, 'board_department', true ) ?>" value="directors" checked class="widefat" size="30">
-    <label for="directors">Directors</label>
-    <br />
-    <input type="radio" id="liasons" name="<?php get_post_meta( $post->ID, 'board_department', true ) ?>" value="liasons" class="widefat" size="30" >
-    <label for="liasons">Liasons</label>
+        // Add an nonce field so we can check for it later.
+        wp_nonce_field( 'wdm_meta_box', 'wdm_meta_box_nonce' );
 
-    <br/>
-    show the department test<br />
-    <?php echo esc_attr( get_post_meta( $post->ID, 'board_department', true ) ); ?>
-    <br />after
-  </p>
-<?php }
+        /*
+         * Use get_post_meta() to retrieve an existing value
+         * from the database and use the value for the form.
+         */
+        $value = get_post_meta( $post->ID, 'board_department', true ); //board_department is a meta_key. Change it to whatever you want
 
-/* Save the meta box's post metadata. */
-function board_department_save_meta( $post_id, $post ) {
+        ?>
+        <label for="wdm_new_field"><?php _e( "Choose value:", 'choose_value' ); ?></label>
+        <br />  
+        <input type="radio" name="the_name_of_the_radio_buttons" value="director" <?php checked( $value, 'director' ); ?> id="director"><label for="director">Director</label><br>
+        <input type="radio" name="the_name_of_the_radio_buttons" value="liason" <?php checked( $value, 'liason' ); ?> id="liason"><label for="liason">Liason</label><br>
 
-	/* Verify the nonce before proceeding. */
-	if ( !isset( $_POST['board_department_nonce'] ) || !wp_verify_nonce( $_POST['board_department_nonce'], basename( __FILE__ ) ) )
-	return $post_id;
+		<!-- before -->
+		<!-- php echo get_post_meta( $post->ID, 'board_department', true ); ?> -->
+		<!-- after -->
 
-	/* Get the post type object. */
-	$post_type = get_post_type_object( $post->post_type );
+        <?php
 
-	/* Check if the current user has permission to edit the post. */
-	if ( !current_user_can( $post_type->cap->edit_post, $post_id ) )
-		return $post_id;
-
-	/* Get the posted data and sanitize it for use as an HTML class. */
-	$new_meta_value = ( $_POST['board-department'] );
-
-	/* Get the meta key. */
-	$meta_key = 'board_department';
-
-	/* Get the meta value of the custom field key. */
-	$meta_value = get_post_meta( $post_id, $meta_key, true );
-
-	/* If a new meta value was added and there was no previous value, add it. */
-	if ( $new_meta_value && '' == $meta_value )
-		add_post_meta( $post_id, $meta_key, $new_meta_value, true );
-
-	/* If the new meta value does not match the old value, update it. */
-	elseif ( $new_meta_value && $new_meta_value != $meta_value )
-		update_post_meta( $post_id, $meta_key, $new_meta_value );
-
-	/* If there is no new meta value but an old value exists, delete it. */
-	elseif ( '' == $new_meta_value && $meta_value )
-		delete_post_meta( $post_id, $meta_key, $meta_value );
 }
+
+/**
+ * When the post is saved, saves our custom data.
+ *
+ * @param int $post_id The ID of the post being saved.
+ */
+function wdm_save_meta_box_data( $post_id ) {
+
+        /*
+         * We need to verify this came from our screen and with proper authorization,
+         * because the save_post action can be triggered at other times.
+         */
+
+        // Check if our nonce is set.
+        if ( !isset( $_POST['wdm_meta_box_nonce'] ) ) {
+                return;
+        }
+
+        // Verify that the nonce is valid.
+        if ( !wp_verify_nonce( $_POST['wdm_meta_box_nonce'], 'wdm_meta_box' ) ) {
+                return;
+        }
+
+        // If this is an autosave, our form has not been submitted, so we don't want to do anything.
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+                return;
+        }
+
+        // Check the user's permissions.
+        if ( !current_user_can( 'edit_post', $post_id ) ) {
+                return;
+        }
+
+
+        // Sanitize user input.
+        $new_meta_value = ( isset( $_POST['the_name_of_the_radio_buttons'] ) ? sanitize_html_class( $_POST['the_name_of_the_radio_buttons'] ) : '' );
+
+        // Update the meta field in the database.
+        update_post_meta( $post_id, 'board_department', $new_meta_value );
+
+}
+
+add_action( 'save_post', 'wdm_save_meta_box_data' );
