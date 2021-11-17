@@ -11,9 +11,11 @@ while ( have_posts() ) :
 	get_template_part( 'template-parts/content/content-page' );
 endwhile; // End of the loop.
 
-wp_reset_postdata();
+wp_reset_postdata(); ?>
 
-$args = array(
+<h2 class="alignwide">Santa Rosa Fire Foundation Board of Directors</h2>
+
+<?php $args = array(
     'post_type'      => 'board',
     'order'          => 'ASC',
     'meta_key'       => 'board_order',
@@ -41,7 +43,7 @@ if ( $meta_query->have_posts() ) {
 /* Restore original Post Data */
 wp_reset_postdata(); ?>
 
-Liasons
+<h2 class="alignwide">City of Santa Rosa Fire Department Liaisons</h2>
 
 <?php $args2 = array(
     'post_type'      => 'board',
