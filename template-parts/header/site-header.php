@@ -23,11 +23,12 @@ $wrapper_classes .= has_nav_menu( 'primary' ) ? ' has-menu' : '';
 		<?php get_template_part( 'template-parts/header/site-branding' ); ?>
 		<?php get_template_part( 'template-parts/header/site-nav' ); ?>
 
-		<div class="the-heros">
-			<img src="<?php echo get_option( 'hero_one' ); ?> " alt="" class="hero hero_one" />
-			<img src="<?php echo get_option( 'hero_two' ); ?> " alt="" class="hero hero_two" />
-			<img src="<?php echo get_option( 'hero_three' ); ?> " alt="" class="hero hero_three" />
-		</div>
-
+		<?php if(is_front_page() ) { ?>
+			<div class="the-heros">
+				<img src="<?php echo get_option( 'hero_one' ); ?> " alt="" class="hero hero_one" />
+				<img src="<?php echo get_option( 'hero_two' ); ?> " alt="" class="hero hero_two" />
+				<img src="<?php echo get_option( 'hero_three' ); ?> " alt="" class="hero hero_three" />
+			</div>
+		<?php } ?>
 	</header><!-- #masthead -->
 </div>

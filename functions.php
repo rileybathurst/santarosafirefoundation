@@ -176,3 +176,7 @@ function board_setup_post_type() {
 	) ); 
 } 
 add_action( 'init', 'board_setup_post_type' );
+
+// use the stylesheet as the theme goes to the parent
+include( get_stylesheet_directory() . '/functions/board-order.php' );
+include( get_stylesheet_directory() . '/functions/board-department.php' );
