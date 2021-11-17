@@ -20,12 +20,12 @@ wp_reset_postdata(); ?>
     // 'orderby'        => 'meta_key',
 );
 
-$meta_query = new WP_Query( $args );
+$query = new WP_Query( $args );
 
 // The Loop
-if ( $meta_query->have_posts() ) {
-    while ( $meta_query->have_posts() ) {
-        $meta_query->the_post(); ?>
+if ( $query->have_posts() ) {
+    while ( $query->have_posts() ) {
+        $query->the_post(); ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
       <div class="entry-content"><h3>Question: <?php the_title(); ?></h3></div>
@@ -48,11 +48,12 @@ if ( $meta_query->have_posts() ) {
 			?>
 		</footer><!-- .entry-footer -->
 	<?php endif; ?>
-</article><!-- #post-<?php the_ID();
-
-    }
+</article>
+    <?php }
 }
+
+
 /* Restore original Post Data */
-wp_reset_postdata();
+// wp_reset_postdata();
 
 get_footer();
