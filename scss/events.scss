@@ -2,16 +2,28 @@
   max-width: var(--responsive--alignwide-width);
   margin-inline: auto;
   margin-block: 2rem;
-}
 
-.pending_event {
-  background-color: var(--midnight);
-  color: white;
-  text-align: center;
-  
-  a {
+  .pending_event {
+    background-color: var(--midnight);
     color: white;
-    margin-block: 1rem;
-    display: inline-block;
+    text-align: center;
+    box-shadow:
+      0 3px 6px hsla(0, 0%, 0%, 0.12),
+      0 2px 4px hsla(0, 0%, 0%, 0.10);
+    transition: 0.2s ease-in-out;
+
+    a {
+      width: 100%;
+      color: white;
+      padding-block: 1rem;
+      display: inline-block;
+    }
+  }
+
+  .pending_event:where(:hover, :focus) {
+    background-color: midnightblue;
+    box-shadow:  
+      0 14px 24px hsla(0, 0%, 0%, 0.16),
+      0 4px 12px hsla(0, 0%, 0%, 0.12);
   }
 }

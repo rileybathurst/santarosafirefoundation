@@ -1,0 +1,29 @@
+{
+    "version": 1,
+    "settings": {
+        "color": {
+            "palette": [
+                {
+                    "name": "Combustion",
+                    "slug": "combustion",
+                    "color": "hsl(0, 62%, 52%)"
+                },
+                {
+                    "name": "Navy",
+                    "slug": "navy",
+                    "color": "hsl(215, 46%, 38%)"
+                },
+                {
+                    "name": "Sand",
+                    "slug": "sand",
+                    "color": "hsl(30, 20%, 92%)"
+                },
+                {
+                    "name": "Midnight",
+                    "slug": "midnight",
+                    "color": "hsl(228, 64%, 8%)"
+                }
+            ]
+        }
+    }
+}

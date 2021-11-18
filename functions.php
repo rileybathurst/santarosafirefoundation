@@ -108,6 +108,19 @@ function twenttwentyone_child_customize_register($wp_customize){
     ));
     // <h1> php echo get_option( 'text_test' ); </h1>
 
+    $wp_customize->add_setting('paypal_donate', array(
+        'default'		=> 'Paypal Donate Button link',
+        'capability'	=> 'edit_theme_options',
+        'type'			=> 'option',
+    ));
+
+    $wp_customize->add_control('paypal_donate', array(
+        'label'		=> __('Paypal', 'twenttwentyone_child'),
+        'section'	=> 'title_tagline',
+        'settings'	=> 'paypal_donate',
+    ));
+    // <h1> php echo get_option( 'text_test' ); </h1>
+
     //  =============================
     //  = Color Picker              =
     //  =============================
