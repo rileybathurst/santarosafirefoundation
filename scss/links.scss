@@ -8,6 +8,8 @@
   font-weight: bold;
   transition: 0.2s ease-in-out;
   margin: calc(var(--global--spacing-vertical) / 2) 0;
+  color: black;
+  z-index: 1;
 }
 
 .paypal-donate:hover {
