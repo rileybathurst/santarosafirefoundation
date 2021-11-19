@@ -8,6 +8,21 @@ function my_plugin_add_stylesheet() {
 }
 add_action( 'wp_enqueue_scripts', 'my_plugin_add_stylesheet' );
 
+/**
+ * Gutenberg scripts and styles
+ * @link https://www.billerickson.net/block-styles-in-gutenberg/
+ */
+function twentytwentyonechild_gutenberg_scripts() {
+    wp_enqueue_script(
+        'twentytwentyonechild-editor', 
+        get_stylesheet_directory_uri() . '/editor.js', 
+        array( 'wp-blocks', 'wp-dom' ), 
+        filemtime( get_stylesheet_directory() . '/editor.js' ),
+        true
+    );
+}
+add_action( 'enqueue_block_editor_assets', 'twentytwentyonechild_gutenberg_scripts' );
+
 // https://developer.wordpress.org/reference/hooks/customize_register/
 function twenttwentyone_child_customize_register($wp_customize){
     $wp_customize->add_section('header_img_options', array(
@@ -215,3 +230,10 @@ function faqs_setup_post_type() {
 	) ); 
 } 
 add_action( 'init', 'faqs_setup_post_type' );
+
+function mytheme_setup_theme_supported_features() {
+    // https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-support/#editor-styles
+    add_theme_support( 'editor-styles' );
+    add_editor_style( '/style-editor.css' );
+}
+add_action( 'after_setup_theme', 'mytheme_setup_theme_supported_features', 100 );

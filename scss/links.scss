@@ -17,11 +17,51 @@
   border: 1px solid gold;
 }
 
-//goldenrodyellow 	
+// this is a real mess
 
-#primary-mobile-menu {
-  background-color: white !important;
-  @media (prefers-color-scheme: dark) {
-    background-color: black !important;
+.primary-navigation a {
+  @media (min-width: 411px) {
+    color: white !important;
+  }
+}
+
+@media (max-width: 411px) {
+
+  #primary-mobile-menu {
+    color: black !important;
+    background-color: white !important;
+
+    @media (prefers-color-scheme: dark) {
+      color: white !important;
+      background-color: black !important;
+    }
+  }
+
+  .is-dark-theme {
+    #primary-mobile-menu {
+      color: black !important;
+      background-color: white !important;
+    }
+
+    .primary-menu-container {
+      a {
+        color: white !important;
+        background-color: black !important;
+      }
+    }
+  }
+
+  .is-light-theme {
+    #primary-mobile-menu {
+      color: white !important;
+      background-color: black !important;
+    }
+
+    .primary-menu-container {
+      a {
+        color: black !important;
+        background-color: white !important;
+      }
+    }
   }
 }
