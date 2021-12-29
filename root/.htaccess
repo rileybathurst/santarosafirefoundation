@@ -1,0 +1,40 @@
+# scp .htaccess dh_igt3bv@sumter.dreamhost.com:santarosafirefoundation.org
+
+# BEGIN WordPress
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+<IfModule mod_headers.c>
+
+# CSP
+
+Header set Content-Security-Policy-Report-Only: "default-src 'self'; \
+style-src 'self' *.wp.com 'unsafe-inline'; \
+script-src 'self' *.wp.com 'unsafe-inline' https://www.google.com https://www.gstatic.com; \
+img-src 'self' *.wp.com secure.gravatar.com; \
+font-src 'self' data:; \
+child-src https://www.youtube.com https://player.vimeo.com; \
+frame-src https://www.youtube.com https://player.vimeo.com; \
+frame-ancestors 'none'; \
+report-uri /csp-violation-report-endpoint.php
+"
+
+Header set Strict-Transport-Security: max-age=63072000
+
+Header set X-Content-Type-Options: nosniff
+
+Header set X-Frame-Options: DENY
+
+</IfModule>

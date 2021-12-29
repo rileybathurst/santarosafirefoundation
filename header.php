@@ -17,6 +17,18 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<meta
+		http-equiv="Content-Security-Policy"
+		content="default-src 'self';
+			style-src 'self' *.wp.com 'unsafe-inline';
+			script-src 'self' *.wp.com 'unsafe-inline' https://www.google.com https://www.gstatic.com;
+			img-src 'self' *.wp.com secure.gravatar.com;
+			font-src 'self' data:;
+			child-src https://www.youtube.com https://player.vimeo.com;
+			frame-src https://www.youtube.com https://player.vimeo.com;"
+		/>
+
 	<?php wp_head(); ?>
 </head>
 
