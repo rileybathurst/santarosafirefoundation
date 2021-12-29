@@ -5,8 +5,10 @@
 
 .is-style-sanded {
   background: linear-gradient(0deg, white, var(--sand) 100%);
-  box-shadow:
-    0 3px 6px hsla(0, 0%, 0%, 0.12),
-    0 2px 4px hsla(0, 0%, 0%, 0.10);
+  box-shadow: 0 3px 6px hsla(0, 0%, 0%, 0.12), 0 2px 4px hsla(0, 0%, 0%, 0.1);
   padding: 1rem;
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--midnight);
+  }
 }
