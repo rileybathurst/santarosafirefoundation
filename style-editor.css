@@ -9,13 +9,43 @@
 }
 
 /*------------------------------------*/
+  /* #variables */
+/*------------------------------------*/
+
+:root {
+	--combustion: hsl(0, 62%, 52%); /* #d03939 */
+	--navy: hsl(215, 46%, 38%); /* #34598d */
+	--sand: hsl(30, 20%, 92%); /* #efebe7 */
+	--midnight: hsl(228, 64%, 8%); /* #070d21 */
+
+	--footer--color-link: white !important; /* needs the imprtant. with variables its hard to track */
+	--branding--logo--max-width-mobile: 12rem !important;
+
+	--global--font-primary: serif !important;
+}
+
+
+/*------------------------------------*/
   /* #SRFF */
 /*------------------------------------*/
 
 .is-style-left-red {
+  border-left: 2px solid white;
   border-left: 2px solid var(--combustion);
   padding-inline-start: 1rem;
 }
+
+.block-editor-block-preview__content .is-style-left-red {
+  /* background-color: var(--combustion); */
+  margin-left: 1rem;
+}
+
+.block-editor-block-preview__content .is-style-left-red::first-letter {
+  /* color: var(--combustion); testing */
+  font-size: 3rem; /* this is a reset but im not sure if its perfect */
+  font-weight: normal; /* trying to reset */
+}
+
 
 .is-style-sanded {
   background: linear-gradient(0deg, white, var(--sand) 100%);
