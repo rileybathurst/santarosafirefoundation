@@ -231,9 +231,9 @@ function faqs_setup_post_type() {
 } 
 add_action( 'init', 'faqs_setup_post_type' );
 
-function mytheme_setup_theme_supported_features() {
+function editor_styles() {
     // https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-support/#editor-styles
     add_theme_support( 'editor-styles' );
     add_editor_style( '/style-editor.css' );
 }
-add_action( 'after_setup_theme', 'mytheme_setup_theme_supported_features', 100 );
+add_action( 'after_setup_theme', 'editor_styles', 100 );

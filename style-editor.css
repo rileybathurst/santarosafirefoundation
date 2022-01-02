@@ -1,3 +1,17 @@
+/*------------------------------------*/
+  /* #Default */
+/*------------------------------------*/
+
+/* By defualt adding theme.json pushes all content to the left. */
+
+.wp-block {
+  margin-inline: auto;
+}
+
+/*------------------------------------*/
+  /* #SRFF */
+/*------------------------------------*/
+
 .is-style-left-red {
   border-left: 2px solid var(--combustion);
   padding-inline-start: 1rem;
@@ -10,3 +24,4 @@
     0 2px 4px hsla(0, 0%, 0%, 0.10);
   padding: 1rem;
 }
+
